@@ -1,6 +1,7 @@
 
 ![Application layer](https://github.com/erenlerfirat/TodoAPI/blob/master/AppLayer.jpg) <br />
-1)Application Layers:Business,DataAccess,Entity,Api. <br />
+<p align="center">
+ 1)Application Layers:Business,DataAccess,Entity,Api. <br />
 2)Entity layer has two models:Todo,Category. <br />
 3)Data Access connects the application with the MsSql server. <br />
 4)Business layer role is making communication and logic between Data Access and Api. <br />
@@ -9,4 +10,4 @@
 Tools and Setup : <br />
 .Net 5.0 <br />
 Data Access=EntityFramework core. <br />
-Logging= Serilog.
+Logging= Serilog.</p>
