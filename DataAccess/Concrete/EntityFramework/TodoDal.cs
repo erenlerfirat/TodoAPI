@@ -32,9 +32,9 @@ namespace DataAccess.Concrete.EntityFramework
             context.SaveChanges();
         }
 
-        public Todo Get(Expression<Func<Todo, bool>> filter)
+        public Todo Get(int id)
         {
-           return context.Set<Todo>().SingleOrDefault(filter);
+            return context.Todos.Find(id);
         }
 
         public List<Todo> GetAll(Expression<Func<Todo, bool>> filter = null)

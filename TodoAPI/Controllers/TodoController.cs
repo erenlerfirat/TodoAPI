@@ -26,7 +26,7 @@ namespace TodoAPI.Controllers
             this.toDoManager = toDoManager;
             this.logger = logger;
         }
-        [HttpGet("Get")]
+        [HttpGet("GetAll")]
         public ToDoResponse ListAll()
         {
             var response = new ToDoResponse();
@@ -34,7 +34,25 @@ namespace TodoAPI.Controllers
             {
                 response.ToDoList = toDoManager.GetAll();
                 response.Message = Messages.Success;
+                logger.LogInformation($"Result message is :{0}",response.Message);
                 return response;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+                return response;
+            }
+        }
+        [HttpGet("GetById")]
+        public ToDoResponse Get(int id)
+        {
+            var response = new ToDoResponse();
+            try
+            {
+                response.SingleTask = toDoManager.Get(id);
+                response.Message = Messages.Success;
+                return response;
+                
             }
             catch (Exception ex)
             {
@@ -47,7 +65,7 @@ namespace TodoAPI.Controllers
         public string PostTodo([FromBody] Todo todo)
         {
             try
-            {
+            {   
                 toDoManager.Create(todo);
                 return Messages.Success;
             }
@@ -58,6 +76,34 @@ namespace TodoAPI.Controllers
             }
             
         }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            try
+            {
+                toDoManager.Delete(id);
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogError(ex.Message);
+            }
+        }
+        [HttpPut]
+        public string Update([FromBody] Todo todo)
+        {
+            try
+            {
+                toDoManager.Update(todo);
+                return Messages.Success;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+                return Messages.Error;
+            }
+        }
     }
 
     public class ToDoResponse
@@ -65,10 +111,10 @@ namespace TodoAPI.Controllers
         public string Message { get; set; }
 
         public List<Todo> ToDoList { get; set; }
+        public Todo SingleTask { get; set; }
 
         public ToDoResponse()
         {
-            ToDoList = new();
             Message = Messages.Error;
         }
     }

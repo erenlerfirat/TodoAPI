@@ -32,9 +32,9 @@ namespace Business.Concrete
             todoDal.Delete(id);
         }
 
-        public Todo Get(Expression<Func<Todo, bool>> filter)
-        {
-           return todoDal.Get(filter);
+        public Todo Get(int id)
+        {  
+           return todoDal.Get(id);
         }
 
         public List<Todo>  GetAll()

@@ -21,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public Category Get(Expression<Func<Category, bool>> filter)
+        public Category Get(int id)
         {
             throw new NotImplementedException();
         }
