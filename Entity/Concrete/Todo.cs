@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Entity.Concrete
 {
-    public class Task
+    public class Todo
     {   [Key]
-        public int TaskId { get; set; }
-        public string TaskName { get; set; }
+        public int TodoId { get; set; }
+        public string TodoName { get; set; }
         public string CategoryName { get; set; }
-        public string TaskDetails { get; set; }
-        public DateTime? TaskDate { get; set; }
+        public string TodoDetails { get; set; }
+        public DateTime? TodoDate { get; set; }
     }
 }
