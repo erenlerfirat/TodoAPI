@@ -10,7 +10,7 @@ namespace Business.Abstract
 {
     public interface IToDoManager
     {
-        Todo Get(int id);
+        Todo GetById(int id);
         List<Todo> GetAll();
         Todo Create(Todo todo);
         Todo Update(Todo todo);

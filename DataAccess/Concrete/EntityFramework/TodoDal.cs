@@ -21,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
-                context.SaveChanges();
+                context.SaveChangesAsync();
             return entity;
         }
 
@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             var entityToDelete = context.Todos.Find(id);
             context.Remove(entityToDelete);
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
         public Todo Get(int id)
@@ -48,7 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             var entityToUpdate = context.Entry(entity);
             entityToUpdate.State = EntityState.Modified;
-            context.SaveChanges();
+            context.SaveChangesAsync();
             return entity;
         }
     }

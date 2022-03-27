@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace TodoAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/Todo")]
     public class TodoController:ControllerBase
     {
 
@@ -49,7 +49,7 @@ namespace TodoAPI.Controllers
             var response = new ToDoResponse();
             try
             {
-                response.SingleTask = toDoManager.Get(id);
+                response.SingleTask = toDoManager.GetById(id);
                 response.Message = Messages.Success;
                 return response;
                 

@@ -32,14 +32,16 @@ namespace Business.Concrete
             todoDal.Delete(id);
         }
 
-        public Todo Get(int id)
+        public Todo GetById(int id)
         {  
            return todoDal.Get(id);
         }
 
-        public List<Todo>  GetAll()
+        public List<Todo> GetAll()
         {
-            return todoDal.GetAll();
+            Expression<Func<Todo, bool>> predicate = p => true;
+            
+            return todoDal.GetAll(predicate);
         }
 
         public Todo Update(Todo todo)
