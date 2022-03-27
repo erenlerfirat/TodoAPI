@@ -1,4 +1,5 @@
-﻿using Entity.Concrete;
+﻿using Core.Utilities.Results;
+using Entity.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace Business.Abstract
 {
     public interface IToDoManager
     {
-        Todo GetById(int id);
-        List<Todo> GetAll();
-        Todo Create(Todo todo);
-        Todo Update(Todo todo);
-        void Delete(int id);
+        IDataResult<Todo> GetById(int id);
+        IDataResult<List<Todo>> GetAll();
+        IResult Create(Todo todo);
+        IDataResult<Todo> Update(Todo todo);
+        IResult Delete(int id);
     }
 }

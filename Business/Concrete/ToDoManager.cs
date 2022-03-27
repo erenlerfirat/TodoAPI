@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entity.Concrete;
@@ -21,32 +22,35 @@ namespace Business.Concrete
         }
         
 
-        public Todo Create(Todo todo)
+        public IResult Create(Todo todo)
         {
             todoDal.Add(todo);
-            return todo;
+            return new SuccessResult("h");
         }
 
-        public void Delete(int id)
+        public IResult Delete(int id)
         {
             todoDal.Delete(id);
+            return new SuccessResult();
         }
 
-        public Todo GetById(int id)
-        {  
-           return todoDal.Get(id);
+        public IDataResult<Todo> GetById(int id)
+        {
+           var result = todoDal.Get(id);
+           return new SuccessDataResult<Todo>(result);
         }
 
-        public List<Todo> GetAll()
+        public IDataResult<List<Todo>> GetAll()
         {
             Expression<Func<Todo, bool>> predicate = p => true;
-            
-            return todoDal.GetAll(predicate);
+            var result = todoDal.GetAll(predicate);
+            return new SuccessDataResult<List<Todo>>(result);
         }
 
-        public Todo Update(Todo todo)
-        {
-            return todoDal.Update(todo);
+        public IDataResult<Todo> Update(Todo todo)
+        {   
+            var result = todoDal.Update(todo);
+            return new SuccessDataResult<Todo>(result);
         }
     }
 }

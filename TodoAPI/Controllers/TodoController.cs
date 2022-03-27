@@ -10,8 +10,8 @@ using System.Collections.Generic;
 namespace TodoAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]/Todo")]
-    public class TodoController:ControllerBase
+    [Route("api/[controller]/Todo")]
+    public class TodoController : ControllerBase
     {
 
         private readonly IToDoManager toDoManager;
@@ -29,7 +29,7 @@ namespace TodoAPI.Controllers
             var response = new ToDoResponse();
             try
             {
-                response.ToDoList = toDoManager.GetAll();
+                response.ToDoList = toDoManager.GetAll().Data;
                 response.Message = Messages.Success;
                 logger.LogInformation($"Result message is :{0}",response.Message);
                 return response;
@@ -46,7 +46,7 @@ namespace TodoAPI.Controllers
             var response = new ToDoResponse();
             try
             {
-                response.SingleTask = toDoManager.GetById(id);
+                response.SingleTask = toDoManager.GetById(id).Data;
                 response.Message = Messages.Success;
                 return response;
                 
