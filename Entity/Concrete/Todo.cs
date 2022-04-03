@@ -13,6 +13,8 @@ namespace Entity.Concrete
         public string TodoName { get; set; }
         public string CategoryName { get; set; }
         public string TodoDetails { get; set; }
-        public DateTime? TodoDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? TodoDeadlineDate { get; set; }
+        public Category Category { get; set; } = new();
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TodoAPI.Controllers
 {
@@ -14,105 +15,59 @@ namespace TodoAPI.Controllers
     public class TodoController : ControllerBase
     {
 
-        private readonly IToDoManager toDoManager;
-        private readonly ILogger<ToDoManager> logger;
+        private readonly IToDoService toDoManager;        
 
 
-        public TodoController(IToDoManager toDoManager, ILogger<ToDoManager> logger)
+        public TodoController(IToDoService toDoManager)
         {
             this.toDoManager = toDoManager;
-            this.logger = logger;
+            
         }
+
         [HttpGet("GetAll")]
-        public ToDoResponse ListAll()
+        public async Task<IActionResult> GetAll()
         {
-            var response = new ToDoResponse();
-            try
-            {
-                response.ToDoList = toDoManager.GetAll().Data;
-                response.Message = Messages.Success;
-                logger.LogInformation($"Result message is :{0}",response.Message);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex.Message);
-                return response;
-            }
+            var result = await toDoManager.GetAll();
+            if (!result.Success)
+                return BadRequest(Messages.Error);
+            return Ok(result.Data);
         }
         [HttpGet("GetById")]
-        public ToDoResponse Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var response = new ToDoResponse();
-            try
-            {
-                response.SingleTask = toDoManager.GetById(id).Data;
-                response.Message = Messages.Success;
-                return response;
-                
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex.Message);
-                return response;
-            }
+            var result = await toDoManager.GetById(id);
+            if (!result.Success)
+                return BadRequest(Messages.Error);
+            return Ok(result.Data);            
         }
 
         [HttpPost("Post")]
-        public string PostTodo([FromBody] Todo todo)
+        public async Task<IActionResult> PostTodo([FromBody] Todo todo)
         {
-            try
-            {   
-                toDoManager.Create(todo);
-                return Messages.Success;
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex.Message);
-                return Messages.Error;
-            }
+            var result = await toDoManager.Create(todo);
+            if (!result.Success)
+                return BadRequest(Messages.Error);
+            return Ok(Messages.Success);
             
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                toDoManager.Delete(id);
-            }
-            catch (Exception ex)
-            {
-
-                logger.LogError(ex.Message);
-            }
+            var result = await toDoManager.Delete(id);
+            if (!result.Success)
+                return BadRequest(Messages.Error);
+            return Ok(Messages.Success);
         }
         [HttpPut]
-        public string Update([FromBody] Todo todo)
-        {
-            try
-            {
-                toDoManager.Update(todo);
-                return Messages.Success;
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex.Message);
-                return Messages.Error;
-            }
+        public async Task<IActionResult> Update([FromBody] Todo todo)
+        {               
+            var result = await toDoManager.Update(todo);
+            if (!result.Success)
+                return BadRequest(Messages.Error);
+            return Ok(result.Data);
         }
     }
 
-    public class ToDoResponse
-    {
-        public string Message { get; set; }
-
-        public List<Todo> ToDoList { get; set; }
-        public Todo SingleTask { get; set; }
-
-        public ToDoResponse()
-        {
-            Message = Messages.Error;
-        }
-    }
+    
 }

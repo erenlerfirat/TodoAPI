@@ -17,38 +17,41 @@ namespace DataAccess.Concrete.EntityFramework
         {
             this.context = context;
         }
-        public Todo Add(Todo entity )
+        public async Task<Todo> Add(Todo entity )
         {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChangesAsync();
+            var addedEntity = context.Entry(entity);
+            addedEntity.State = EntityState.Added;
+            await context.SaveChangesAsync();
             return entity;
         }
 
-        public void Delete(int id)
-        {
-            var entityToDelete = context.Todos.Find(id);
+        public Task Delete(int id)
+        { 
+           return Task.Run(()=> {
+            var entityToDelete = context.Todos.FindAsync(id);
             context.Remove(entityToDelete);
             context.SaveChangesAsync();
+            });
+            
         }
 
-        public Todo Get(int id)
+        public async Task<Todo> Get(int id)
         {
-            return context.Todos.Find(id);
+            return await context.Todos.FindAsync(id);
         }
 
-        public List<Todo> GetAll(Expression<Func<Todo, bool>> filter = null)
+        public async Task<List<Todo>> GetAll(Expression<Func<Todo, bool>> filter = null)
         {
                 return filter == null
-                    ? context.Set<Todo>().ToList()
-                    : context.Set<Todo>().Where(filter).ToList();
+                    ? await context.Set<Todo>().ToListAsync()
+                    : await context.Set<Todo>().Where(filter).ToListAsync();
         }
 
-        public Todo Update(Todo entity)
+        public async Task<Todo> Update(Todo entity)
         {
             var entityToUpdate = context.Entry(entity);
             entityToUpdate.State = EntityState.Modified;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return entity;
         }
     }

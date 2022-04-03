@@ -11,5 +11,7 @@ namespace Entity.Concrete
     {   [Key]
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public string CategoryDetail { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

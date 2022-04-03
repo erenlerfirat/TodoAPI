@@ -9,10 +9,10 @@ namespace DataAccess.Abstract
 {
     public interface IEntityRepository<T> where T :class,new ()
     {
-        List<T> GetAll(Expression<Func<T, bool>> filter = null);
-        T Get(int id);
-        T Add(T entity);
-        T Update(T entity);
-        void Delete(int id);
+        Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null);
+        Task<T> Get(int id);
+        Task<T> Add(T entity);
+        Task<T> Update(T entity);
+        Task Delete(int id);
     }
 }

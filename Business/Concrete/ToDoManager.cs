@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class ToDoManager:IToDoManager
+    public class ToDoManager:IToDoService
     {
         
         private readonly ITodoDal todoDal;
@@ -22,34 +22,34 @@ namespace Business.Concrete
         }
         
 
-        public IResult Create(Todo todo)
+        public async Task<IResult> Create(Todo todo)
         {
-            todoDal.Add(todo);
-            return new SuccessResult("h");
-        }
-
-        public IResult Delete(int id)
-        {
-            todoDal.Delete(id);
+           await todoDal.Add(todo);
             return new SuccessResult();
         }
 
-        public IDataResult<Todo> GetById(int id)
+        public async Task<IResult> Delete(int id)
         {
-           var result = todoDal.Get(id);
+            await todoDal.Delete(id);
+            return new SuccessResult();
+        }
+
+        public async Task<IDataResult<Todo>> GetById(int id)
+        {
+           var result = await todoDal.Get(id);
            return new SuccessDataResult<Todo>(result);
         }
 
-        public IDataResult<List<Todo>> GetAll()
+        public async Task<IDataResult<List<Todo>>> GetAll()
         {
             Expression<Func<Todo, bool>> predicate = p => true;
-            var result = todoDal.GetAll(predicate);
+            var result = await todoDal .GetAll(predicate);
             return new SuccessDataResult<List<Todo>>(result);
         }
 
-        public IDataResult<Todo> Update(Todo todo)
+        public async Task<IDataResult<Todo>> Update(Todo todo)
         {   
-            var result = todoDal.Update(todo);
+            var result = await todoDal.Update(todo);
             return new SuccessDataResult<Todo>(result);
         }
     }

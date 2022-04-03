@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entity.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,29 +13,46 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class CategoryDal : ICategoryDal
     {
-        public Category Add(Category entity)
+        private readonly TodoContext context;
+
+        public CategoryDal(TodoContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+        }
+        public async Task<Category> Add(Category entity)
+        {   
+            await context.AddAsync(entity);
+            await context.SaveChangesAsync();
+            return entity;
         }
 
-        public void Delete(int id)
+        public Task Delete(int id)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => {
+             var category = context.FindAsync<Category>(id);
+             context.Remove(category);
+             context.SaveChangesAsync();
+            });                        
         }
 
-        public Category Get(int id)
+        public async Task<Category> Get(int id)
         {
-            throw new NotImplementedException();
+            return await context.FindAsync<Category>(id);
         }
 
-        public List<Category> GetAll(Expression<Func<Category, bool>> filter = null)
+        public async Task<List<Category>> GetAll(Expression<Func<Category, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return filter == null
+                ? context.Set<Category>().ToList()
+                : context.Set<Category>().Where(filter).ToList();         
         }
 
-        public Category Update(Category entity)
+        public async Task<Category> Update(Category entity)
         {
-            throw new NotImplementedException();
+            var category = context.Entry<Category>(entity);
+            category.State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return entity;
         }
 
       
