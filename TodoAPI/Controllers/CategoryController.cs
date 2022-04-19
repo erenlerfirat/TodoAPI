@@ -11,13 +11,6 @@ namespace TodoAPI.Controllers
     [Route("api/[controller]/Category")]
     public class CategoryController : ControllerBase
     {
-        public CategoryController(ICategoryManager categoryManager)
-        {
-
-        }
-        public async Task<IActionResult> GetAll() 
-        {
-            
-        }
+        
     }
 }
