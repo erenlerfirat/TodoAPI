@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace Entity.Concrete
 {
     public class Category
-    {   [Key]
-        public int CategoryId { get; set; }
+    {
+        public int Id { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDetail { get; set; }
         public DateTime CreateDate { get; set; }
+        public virtual ICollection<Todo> Todos {get;set;}
     }
 }

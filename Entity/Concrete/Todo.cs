@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Entity.Concrete
 {
     public class Todo
-    {   [Key]
-        public int TodoId { get; set; }
+    {   
+        public int Id { get; set; }
         public int TodoDetailId { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
