@@ -10,9 +10,16 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class TodoContext:DbContext
     {
-        public TodoContext(DbContextOptions<TodoContext> options):base (options)
+        public TodoContext(DbContextOptions<TodoContext> options) : base(options)
         {
-            
+
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .UseSqlServer(
+                    @"Server=ISTN37241;database=Todo;Trusted_Connection=True;MultipleActiveResultSets=True",
+                    providerOptions => { providerOptions.EnableRetryOnFailure(5); });
         }
         public DbSet<Todo> Todos { get; set; }
         public DbSet<Category> Categories { get; set; }
