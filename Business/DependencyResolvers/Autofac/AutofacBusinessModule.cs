@@ -16,13 +16,13 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<IToDoService>().As<ToDoManager>().SingleInstance();
-            builder.RegisterType<ITodoDal>().As<TodoDal>().SingleInstance();
+            builder.RegisterType<ToDoManager>().As<IToDoService>().SingleInstance();
+            builder.RegisterType<TodoDal>().As<ITodoDal> ().SingleInstance();
 
-            builder.RegisterType<ICategoryService>().As<CategoryManager>().SingleInstance();
-            builder.RegisterType<ICategoryDal>().As<CategoryDal>().SingleInstance();
-                        
-            builder.RegisterGeneric(typeof(Logger<>)).As<ILogger>().InstancePerLifetimeScope(); // needs to be tested
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<CategoryDal>().As<ICategoryDal>().SingleInstance();
+
+            builder.RegisterGeneric(typeof(Logger<>)).As(typeof(ILogger<>)).InstancePerLifetimeScope(); // needs to be tested            
         }
     }
 }
