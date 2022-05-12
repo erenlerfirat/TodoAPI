@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TodoAPI.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,8 @@ namespace TodoAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id)
+                        .Annotation("SqlServer:Clustered", true);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +61,8 @@ namespace TodoAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TodoDetails", x => x.Id);
+                    table.PrimaryKey("PK_TodoDetails", x => x.Id)
+                        .Annotation("SqlServer:Clustered", true);
                     table.ForeignKey(
                         name: "FK_TodoDetails_Todos_TodoId",
                         column: x => x.TodoId,
@@ -77,7 +79,8 @@ namespace TodoAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Todos_CategoryId",
                 table: "Todos",
-                column: "CategoryId");
+                column: "CategoryId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

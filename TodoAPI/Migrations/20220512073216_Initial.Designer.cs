@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TodoAPI.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20220420114351_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220512073216_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,8 @@ namespace TodoAPI.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered();
 
                     b.ToTable("Categories");
                 });
@@ -73,7 +74,8 @@ namespace TodoAPI.Migrations
                     b.HasKey("Id")
                         .IsClustered();
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryId")
+                        .IsUnique();
 
                     b.ToTable("Todos");
                 });
@@ -94,7 +96,8 @@ namespace TodoAPI.Migrations
                     b.Property<int?>("TodoId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered();
 
                     b.HasIndex("TodoId");
 
