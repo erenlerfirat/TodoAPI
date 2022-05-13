@@ -46,9 +46,9 @@ namespace TodoAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoAPI v1"));
+                app.UseCors(a => { a.AllowCredentials().WithOrigins("devUrl", "devUrl2", "stageUrl").AllowAnyMethod().AllowAnyHeader();});
             }
-            app.UseAuthentication();
-
+            app.UseAuthentication();            
             app.UseHttpsRedirection();
             app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseRouting();

@@ -19,7 +19,7 @@ namespace TodoAPI
     {
         public static void Main(string[] args)
         {            
-            IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
+            IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true).Build();
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
             CreateHostBuilder(args).Build().Run();
         }
