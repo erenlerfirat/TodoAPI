@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.IEntity;
+using DataAccess.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfEntityRepositoryBase<TEntity,TContext> : IEntityRepository<TEntity>
         where TContext : DbContext
-        where TEntity : class ,new()
+        where TEntity : class ,IEntity, new()
     {
         private readonly TContext _context;
 

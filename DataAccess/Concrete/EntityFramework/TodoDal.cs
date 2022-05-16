@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class TodoDal : EfEntityRepositoryBase<Category, TodoContext>
+    public class TodoDal : EfEntityRepositoryBase<Todo, TodoContext>,ITodoDal
     {
         public TodoDal(TodoContext context):base(context)
         {

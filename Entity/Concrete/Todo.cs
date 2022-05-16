@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.IEntity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Concrete
 {
-    public class Todo
+    public class Todo : IEntity
     {   
         public int Id { get; set; }
         public int TodoDetailId { get; set; }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class CategoryDal : EfEntityRepositoryBase<Category, TodoContext> 
+    public class CategoryDal : EfEntityRepositoryBase<Category, TodoContext> , ICategoryDal
     {
         public CategoryDal(TodoContext context):base(context)
         {
