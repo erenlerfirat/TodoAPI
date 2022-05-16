@@ -8,6 +8,6 @@
 5)In Api there is a controller TodoController with CRUD methods with 5 endpoints. <br />
 6)In the Api layer there is a Middleware for logging requests (logging the request body and method). <br />
 Tools and Setup : <br />
-.Net 5.0 <br />
+.Net 6.0 <br />
 Data Access=EntityFramework core. <br />
 Logging= Serilog.</p>
