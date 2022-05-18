@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TodoAPI.Migrations
+namespace DataAccess.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,14 +13,13 @@ namespace TodoAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CategoryDetail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreateDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id)
-                        .Annotation("SqlServer:Clustered", true);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -32,21 +31,19 @@ namespace TodoAPI.Migrations
                     TodoDetailId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    TodoName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeadlineDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    TodoName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "date", nullable: false),
+                    DeadlineDate = table.Column<DateTime>(type: "date", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Todos", x => x.Id)
-                        .Annotation("SqlServer:Clustered", true);
+                    table.PrimaryKey("PK_Todos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Todos_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -55,20 +52,18 @@ namespace TodoAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ContentDetail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ContentDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "date", nullable: false),
                     TodoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TodoDetails", x => x.Id)
-                        .Annotation("SqlServer:Clustered", true);
+                    table.PrimaryKey("PK_TodoDetails", x => x.Id);
                     table.ForeignKey(
                         name: "FK_TodoDetails_Todos_TodoId",
                         column: x => x.TodoId,
                         principalTable: "Todos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -79,8 +74,7 @@ namespace TodoAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Todos_CategoryId",
                 table: "Todos",
-                column: "CategoryId",
-                unique: true);
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

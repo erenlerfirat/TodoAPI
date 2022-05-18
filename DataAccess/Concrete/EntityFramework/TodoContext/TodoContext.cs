@@ -15,14 +15,25 @@ namespace DataAccess.Concrete.EntityFramework
         {
 
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder
-        //        .UseSqlServer(
-        //            @"Server=ISTN37241;database=Todo;Trusted_Connection=True;MultipleActiveResultSets=True",
-        //            providerOptions => { providerOptions.EnableRetryOnFailure(5); });
-        //}
-        
+        public TodoContext() 
+        {
+
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (optionsBuilder.IsConfigured)
+            {
+                throw new NotImplementedException("idiot");
+            }
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+               .UseSqlServer(
+                   @"Server=ISTN37241;database=Todo;Trusted_Connection=True;MultipleActiveResultSets=True",
+                   providerOptions => { providerOptions.EnableRetryOnFailure(5); });
+            }
+        }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

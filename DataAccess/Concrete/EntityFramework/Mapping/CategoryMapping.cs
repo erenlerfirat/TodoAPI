@@ -18,8 +18,7 @@ namespace DataAccess.Concrete.EntityFramework.Mapping
             builder.Property(c => c.CategoryDetail);
             builder.Property(c => c.CreateDate).HasColumnType(EntityColumnTypes.Date);
             builder.Property(c => c.CategoryName).IsRequired().HasMaxLength(50);
-
-            builder.HasMany(c => c.Todos).WithOne();
+            
         }
     }
 }

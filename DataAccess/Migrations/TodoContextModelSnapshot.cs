@@ -4,16 +4,14 @@ using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace TodoAPI.Migrations
+namespace DataAccess.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20220512073216_Initial")]
-    partial class Initial
+    partial class TodoContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,13 +30,14 @@ namespace TodoAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
-                    b.HasKey("Id")
-                        .IsClustered();
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
                 });
@@ -54,28 +53,29 @@ namespace TodoAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<DateTime?>("DeadlineDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<int>("TodoDetailId")
                         .HasColumnType("int");
 
                     b.Property<string>("TodoName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id")
-                        .IsClustered();
+                    b.HasKey("Id");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Todos");
                 });
@@ -88,16 +88,16 @@ namespace TodoAPI.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ContentDetail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<int?>("TodoId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id")
-                        .IsClustered();
+                    b.HasKey("Id");
 
                     b.HasIndex("TodoId");
 
@@ -109,7 +109,7 @@ namespace TodoAPI.Migrations
                     b.HasOne("Entity.Concrete.Category", "Category")
                         .WithMany("Todos")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -119,7 +119,8 @@ namespace TodoAPI.Migrations
                 {
                     b.HasOne("Entity.Concrete.Todo", null)
                         .WithMany("TodoDetails")
-                        .HasForeignKey("TodoId");
+                        .HasForeignKey("TodoId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Entity.Concrete.Category", b =>

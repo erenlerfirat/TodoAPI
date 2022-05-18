@@ -30,8 +30,8 @@ namespace TodoAPI
             services.AddScoped<ILogger, Logger<ToDoManager>>();
             services.AddScoped<ITodoDal, TodoDal>();
             services.AddControllers();
-            services.AddDbContext<TodoContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),b=>b.MigrationsAssembly("TodoAPI")));                        
+            //services.AddDbContext<TodoContext>(
+            //    options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),b=>b.MigrationsAssembly("TodoAPI")));                        
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoAPI", Version = "v1" });
