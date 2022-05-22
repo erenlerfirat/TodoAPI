@@ -12,6 +12,7 @@ namespace DataAccess.Abstract
     {
         Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null);
         Task<T> Get(int id);
+        Task<T> Get(Expression<Func<T, bool>> filter);
         Task<T> Add(T entity);
         Task<T> Update(T entity);
         Task Delete(int id);

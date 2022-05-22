@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,11 +11,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class TodoDal : EfEntityRepositoryBase<Todo, TodoContext>,ITodoDal
+    public class EfCategoryDal : EfEntityRepositoryBase<Category, TodoContext> , ICategoryDal
     {
-        public TodoDal(TodoContext context):base(context)
+        public EfCategoryDal(TodoContext context):base(context)
         {
 
-        }
+        }        
+      
     }
 }

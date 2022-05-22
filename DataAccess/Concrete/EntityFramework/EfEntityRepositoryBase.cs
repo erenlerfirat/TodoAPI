@@ -41,7 +41,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             return await _context.FindAsync<TEntity>(id);
         }
-
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
+        {
+            return await _context.Set<TEntity>().Where(filter).SingleOrDefaultAsync();
+        }
         public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             return filter == null
@@ -56,5 +59,6 @@ namespace DataAccess.Concrete.EntityFramework
             await _context.SaveChangesAsync();
             return entity;
         }
+        
     }
 }

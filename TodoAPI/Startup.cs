@@ -28,7 +28,7 @@ namespace TodoAPI
         {
             services.AddScoped<IToDoService, ToDoManager>();
             services.AddScoped<ILogger, Logger<ToDoManager>>();
-            services.AddScoped<ITodoDal, TodoDal>();
+            services.AddScoped<ITodoDal, EfTodoDal>();
             services.AddControllers();
             //services.AddDbContext<TodoContext>(
             //    options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),b=>b.MigrationsAssembly("TodoAPI")));                        

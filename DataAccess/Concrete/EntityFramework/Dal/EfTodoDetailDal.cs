@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class TodoDetailDal : EfEntityRepositoryBase<TodoDetail , TodoContext>,ITodoDetailDal
+    public class EfTodoDetailDal : EfEntityRepositoryBase<TodoDetail , TodoContext>,ITodoDetailDal
     {
-        public TodoDetailDal(TodoContext context) : base(context)
+        public EfTodoDetailDal(TodoContext context) : base(context)
         {
 
         }
