@@ -29,8 +29,8 @@ namespace Business.Concrete
         }
 
         public async Task<User> GetByMail(string email)
-        {
-            return await _userDal.Get(u => u.Email == email);
+        {   var result = await _userDal.Get(u => u.Email == email);
+            return result;
         }
     }
 }

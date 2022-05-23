@@ -24,7 +24,7 @@ namespace Business.Concrete
             _tokenHelper = tokenHelper;
         }
 
-        public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
+        public async Task<IDataResult<User>> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -57,9 +57,9 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
         }
 
-        public IResult UserExists(string email)
-        {
-            if (_userService.GetByMail(email) != null)
+        public async Task< IResult> UserExists(string email)
+        {            
+            if (await _userService.GetByMail(email) != null)
             {
                 return new ErrorResult(Messages.UserAlreadyExists);
             }
