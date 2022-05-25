@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Entity.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,17 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
-        public void Add(User user)
+        public async Task<IResult> AddAsync(User user)
         {
-            _userDal.Add(user);
+            await _userDal.Add(user);
+            return new SuccessResult();
         }
 
-        public async Task<User> GetByMail(string email)
+        public async Task<IDataResult<User>> GetByMail(string email)
         {   var result = await _userDal.Get(u => u.Email == email);
-            return result;
+            if (result == null)
+               return new ErrorDataResult<User>();
+            return  new SuccessDataResult<User>(result); ;
         }
     }
 }

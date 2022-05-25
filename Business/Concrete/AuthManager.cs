@@ -37,13 +37,13 @@ namespace Business.Concrete
                 PasswordSalt = passwordSalt,
                 Status = true
             };
-            _userService.Add(user);
+            var res = await _userService.AddAsync(user);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
         public async Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = await _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck = (await _userService.GetByMail(userForLoginDto.Email)).Data;
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
@@ -58,8 +58,9 @@ namespace Business.Concrete
         }
 
         public async Task< IResult> UserExists(string email)
-        {            
-            if (await _userService.GetByMail(email) != null)
+        {
+            var result = await _userService.GetByMail(email);
+            if (result.Success)
             {
                 return new ErrorResult(Messages.UserAlreadyExists);
             }

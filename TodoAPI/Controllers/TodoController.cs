@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace TodoAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/Todo")]
+    [Route("api/[controller]/")]
     public class TodoController : ControllerBase
     {
 
@@ -51,7 +51,7 @@ namespace TodoAPI.Controllers
 
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await toDoManager.Delete(id);
@@ -59,7 +59,7 @@ namespace TodoAPI.Controllers
                 return BadRequest(Messages.Error);
             return Ok(Messages.Success);
         }
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update([FromBody] Todo todo)
         {
             var result = await toDoManager.Update(todo);

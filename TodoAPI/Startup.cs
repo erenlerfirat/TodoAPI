@@ -1,5 +1,8 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.Ioc;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -30,9 +33,9 @@ namespace TodoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IToDoService, ToDoManager>();
+            //services.AddScoped<IToDoService, ToDoManager>();
             services.AddScoped<ILogger, Logger<ToDoManager>>();
-            services.AddScoped<ITodoDal, EfTodoDal>();
+            //services.AddScoped<ITodoDal, EfTodoDal>();
             services.AddControllers();
             //services.AddDbContext<TodoContext>(
             //    options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),b=>b.MigrationsAssembly("TodoAPI")));                        
@@ -56,6 +59,7 @@ namespace TodoAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+            services.AddDependencyResolvers(new ICoreModule[] {new CoreModule()});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

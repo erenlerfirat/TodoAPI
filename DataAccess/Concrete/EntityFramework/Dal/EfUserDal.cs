@@ -11,6 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
 
         }
+        public void Add() { }
         
         public List<OperationClaim> GetClaims(User user)
         {
