@@ -47,9 +47,12 @@ namespace DataAccess.Concrete.EntityFramework
         }
         public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            return filter == null
-                ? _context.Set<TEntity>().ToList()
-                : _context.Set<TEntity>().Where(filter).ToList();
+           return await Task.Run(() => {
+                return filter == null
+                        ? _context.Set<TEntity>().ToList()
+                        : _context.Set<TEntity>().Where(filter).ToList();
+            });
+            
         }
 
         public async Task<TEntity> Update(TEntity entity)
