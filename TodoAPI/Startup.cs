@@ -69,7 +69,10 @@ namespace TodoAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoAPI v1"));
+                app.UseSwaggerUI(c => 
+                { c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoAPI v1");
+                  c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+                });
                 app.UseCors(a => { a.AllowCredentials().WithOrigins("devUrl", "devUrl2", "stageUrl").AllowAnyMethod().AllowAnyHeader();});
             }
 
