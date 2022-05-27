@@ -18,12 +18,12 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
-        public Task<IResult> CreateAsync(Category todo)
+        public async Task<IResult> CreateAsync(Category todo)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IResult> DeleteAsync(int id)
+        public async Task<IResult> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -34,7 +34,7 @@ namespace Business.Concrete
             return new SuccessDataResult<ICollection<Category>>(result);
         }
 
-        public Task<IDataResult<Category>> GetByIdAsync(int id)
+        public async Task<IDataResult<Category>> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

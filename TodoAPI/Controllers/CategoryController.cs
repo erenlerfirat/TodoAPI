@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using Business.Constants;
+using Entity.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,6 +20,14 @@ namespace TodoAPI.Controllers
         {
             _categoryService = categoryService;
         }
+        [HttpPost("Add")]
+        public async Task<IActionResult> Create(Category category)
+        {
+            var result = await _categoryService.CreateAsync(category);
+            if(result.Success)
+                return Ok(Messages.Error);
+            return BadRequest(Messages.Success);
+        }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -29,5 +38,14 @@ namespace TodoAPI.Controllers
             }
             return BadRequest(Messages.Error);
         }
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _categoryService.DeleteAsync(id);
+            if(result.Success)
+                return Ok(Messages.Success);
+            return BadRequest(Messages.Error);
+        }
+        
     }
 }

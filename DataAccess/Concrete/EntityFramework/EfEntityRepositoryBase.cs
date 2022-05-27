@@ -27,14 +27,15 @@ namespace DataAccess.Concrete.EntityFramework
             return entity;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            return Task.Run(() =>
+            await Task.Run(() =>
             {
                 var category = _context.FindAsync<TEntity>(id);
                 _context.Remove(category);
                 _context.SaveChangesAsync();
-            });
+                return Task.CompletedTask;
+            });            
         }
 
         public async Task<TEntity> Get(int id)
