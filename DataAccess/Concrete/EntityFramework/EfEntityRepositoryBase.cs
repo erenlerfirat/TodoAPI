@@ -29,13 +29,9 @@ namespace DataAccess.Concrete.EntityFramework
 
         public async Task Delete(int id)
         {
-            await Task.Run(() =>
-            {
-                var category = _context.FindAsync<TEntity>(id);
-                _context.Remove(category);
-                _context.SaveChangesAsync();
-                return Task.CompletedTask;
-            });            
+            var category = (TEntity)_context.FindAsync<TEntity>(id).Result;
+            _context.Remove<TEntity>(category);
+             await _context.SaveChangesAsync();
         }
 
         public async Task<TEntity> Get(int id)
@@ -52,8 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
                 return filter == null
                         ? _context.Set<TEntity>().ToList()
                         : _context.Set<TEntity>().Where(filter).ToList();
-            });
-            
+            });            
         }
 
         public async Task<TEntity> Update(TEntity entity)
