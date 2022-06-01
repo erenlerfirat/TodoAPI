@@ -18,10 +18,6 @@ namespace DataAccess.Concrete.EntityFramework
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (optionsBuilder.IsConfigured)
-            {
-                throw new NotImplementedException("idiot");
-            }
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
