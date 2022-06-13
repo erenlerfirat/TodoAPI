@@ -37,6 +37,8 @@ namespace TodoAPI
             services.AddControllers().AddJsonOptions(opt =>
             opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
+            services.AddMemoryCache();
+
             services.AddDbContext<TodoContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"), b => b.MigrationsAssembly("TodoAPI")));
             services.AddSwaggerGen(c =>
