@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfUserDal : EfEntityRepositoryBase<User, TodoContext>, IUserDal
+    public class UserDal : EntityRepositoryBase<User, TodoContext>, IUserDal
     {
-        public EfUserDal(TodoContext context):base(context)
+        public UserDal(TodoContext context):base(context)
         {
 
         }

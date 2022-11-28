@@ -19,22 +19,39 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public List<OperationClaim> GetClaims(User user)
-        {
-            return _userDal.GetClaims(user);
-        }
-
         public async Task<IResult> AddAsync(User user)
         {
-            await _userDal.Add(user);
-            return new SuccessResult();
+            var result = await _userDal.AddAsync(user);
+
+            if(result is not null)
+             return new SuccessResult("Success");
+
+            return new ErrorResult("Error");
         }
 
-        public async Task<IDataResult<User>> GetByMail(string email)
-        {   var result = await _userDal.Get(u => u.Email == email);
-            if (result == null)
-               return new ErrorDataResult<User>();
-            return  new SuccessDataResult<User>(result); ;
+        public Task<IResult> DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<List<User>>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<User>> GetByIdAync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<User>> GetByMailAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResult> UpdateAsync(User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

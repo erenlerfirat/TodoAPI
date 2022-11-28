@@ -1,20 +1,18 @@
 ﻿using Core.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
     public interface IEntityRepository<T> where T :class,IEntity,new()
     {
-        Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null);
-        Task<T> Get(int id);
-        Task<T> Get(Expression<Func<T, bool>> filter);
-        Task<T> Add(T entity);
-        Task<T> Update(T entity);
-        Task Delete(int id);
+        Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null);
+        Task<T> GetAsync(int id);
+        Task<T> GetAsync(Expression<Func<T, bool>> filter);
+        Task<T> AddAsync(T entity);
+        Task<T> UpdateAsync(T entity);
+        Task DeleteAsync(int id);
     }
 }
