@@ -20,8 +20,7 @@ namespace TodoAPI.Middleware
         }
 
         public async Task Invoke(HttpContext context)
-        {   // catch the request here and before release it you can do your operations here easily.
-            
+        {
             var reqBody = context.Request.Body.ToString();
             var reqMethod = context.Request.Method.ToString();
             logger.LogInformation(reqBody,reqMethod);
