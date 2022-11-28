@@ -1,11 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
 using Business.Constants;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace TodoAPI.Controllers
