@@ -28,32 +28,32 @@ namespace Business.Concrete
         public async Task<IResult> Create(Todo todo)
         {
             ValidationTool.Validate(new TodoValidator(), todo);
-            await todoDal.Add(todo);
+            await todoDal.AddAsync(todo);
             return new SuccessResult();
         }
 
         public async Task<IResult> Delete(int id)
         {
-            await todoDal.Delete(id);
+            await todoDal.DeleteAsync(id);
             return new SuccessResult();
         }
 
         public async Task<IDataResult<Todo>> GetById(int id)
         {
-            var result = await todoDal.Get(id);
+            var result = await todoDal.GetAsync(id);
             return new SuccessDataResult<Todo>(result);
         }
 
         public async Task<IDataResult<List<Todo>>> GetAll()
         {
             Expression<Func<Todo, bool>> predicate = p => true;
-            var result = await todoDal.GetAll(predicate);
+            var result = await todoDal.GetAllAsync(predicate);
             return new SuccessDataResult<List<Todo>>(result);
         }
 
         public async Task<IDataResult<Todo>> Update(Todo todo)
         {
-            var result = await todoDal.Update(todo);
+            var result = await todoDal.UpdateAsync(todo);
             return new SuccessDataResult<Todo>(result);
         }
     }

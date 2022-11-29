@@ -1,5 +1,4 @@
-﻿using Core.Entity.Concrete;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.Migrations
 {

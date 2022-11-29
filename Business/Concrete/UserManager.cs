@@ -2,10 +2,9 @@
 using Core.Entity.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using Entity.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
@@ -29,12 +28,27 @@ namespace Business.Concrete
             return new ErrorResult("Error");
         }
 
+        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IResult> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IDataResult<List<User>>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetById(int id)
         {
             throw new NotImplementedException();
         }

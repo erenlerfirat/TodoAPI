@@ -1,5 +1,6 @@
 ﻿using Core.Entity.Concrete;
 using Core.Utilities.Results;
+using Entity.Concrete;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,5 +14,8 @@ namespace Business.Abstract
         Task<IResult> DeleteAsync(int id);
         Task<IDataResult<User>> GetByIdAync(int id);
         Task<IDataResult<List<User>>> GetAllAsync();
+        AuthenticateResponse Authenticate(AuthenticateRequest model);
+        IEnumerable<User> GetAll();
+        User GetById(int id);
     }
 }

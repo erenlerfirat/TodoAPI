@@ -2,7 +2,6 @@
 using DataAccess.Concrete.EntityFramework.Mapping;
 using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -39,7 +38,5 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Category> Categories { get; set; }
         public DbSet<TodoDetail> TodoDetails { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<OperationClaim> OperationClaims { get; set; }
-        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

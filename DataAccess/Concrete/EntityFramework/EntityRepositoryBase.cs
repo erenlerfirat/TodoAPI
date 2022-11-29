@@ -28,7 +28,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public async Task DeleteAsync(int id)
         {
-            var category = await _context.FindAsync<TEntity>(id).Result;
+            var category = await _context.FindAsync<TEntity>(id);
             _context.Remove<TEntity>(category);
              await _context.SaveChangesAsync();
         }
