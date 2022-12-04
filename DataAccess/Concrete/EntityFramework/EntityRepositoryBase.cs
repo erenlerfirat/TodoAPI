@@ -14,6 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
         where TEntity : class ,IEntity, new()
     {
         private readonly TContext _context;
+        private readonly IQueryable _queryable;
 
         public EntityRepositoryBase(TContext context)
         {
@@ -26,21 +27,28 @@ namespace DataAccess.Concrete.EntityFramework
             return entity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> filter)
         {
-            var category = await _context.FindAsync<TEntity>(id);
-            _context.Remove<TEntity>(category);
-             await _context.SaveChangesAsync();
+            return await _context.Set<TEntity>().Where(filter).FirstOrDefaultAsync();
         }
 
-        public async Task<TEntity> GetAsync(int id)
-        {
-            return await _context.FindAsync<TEntity>(id);
-        }
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> filter)
         {
             return await _context.Set<TEntity>().Where(filter).SingleOrDefaultAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var category = await _context.FindAsync<TEntity>(id);
+            _context.Remove(category);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<TEntity> GetByIdAsync(int id)
+        {
+            return await _context.FindAsync<TEntity>(id);
+        }
+        
         public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
            return await Task.Run(() => {
