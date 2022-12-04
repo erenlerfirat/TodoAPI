@@ -1,4 +1,5 @@
 ﻿using Core.Entity.Concrete;
+using Core.Helpers;
 using DataAccess.Concrete.EntityFramework.Mapping;
 using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-               .UseSqlServer(
-                   @"Server=ISTN37241;database=Todo;Trusted_Connection=True;MultipleActiveResultSets=True",
+               .UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString", ""),
                    providerOptions => { providerOptions.EnableRetryOnFailure(5); });
             }
         }

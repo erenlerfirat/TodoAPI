@@ -14,7 +14,7 @@ namespace Business.Abstract
         Task<IResult> DeleteAsync(int id);
         Task<IDataResult<User>> GetByIdAync(int id);
         Task<IDataResult<List<User>>> GetAllAsync();
-        AuthenticateResponse Authenticate(AuthenticateRequest model);
+        Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
         IEnumerable<User> GetAll();
         User GetById(int id);
     }

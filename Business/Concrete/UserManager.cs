@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Entity.Concrete;
+using Core.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
@@ -28,15 +29,15 @@ namespace Business.Concrete
             return new ErrorResult("Error");
         }
 
-        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model)
         {
-            var user = _userDal.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
-
+            var user = await _userDal.SingleOrDefaultAsync(x => x.UserName == model.Username && x.Password == model.Password);
+            
             // return null if user not found
             if (user == null) return null;
 
             // authentication successful so generate jwt token
-            var token = generateJwtToken(user);
+            var token = TokenHelper.GenerateJwtToken(user);
 
             return new AuthenticateResponse(user, token);
         }

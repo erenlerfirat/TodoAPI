@@ -9,7 +9,7 @@ namespace Core.Helpers
     {   
         private static readonly IConfigurationRoot Configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json").Build();
+            .AddJsonFile("appsettings.Development.json").Build();
 
         public static T GetValue<T>(string key, T defaultValue)
         {            
