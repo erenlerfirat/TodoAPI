@@ -30,7 +30,15 @@ namespace Business.Concrete
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            throw new NotImplementedException();
+            var user = _userDal.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+
+            // return null if user not found
+            if (user == null) return null;
+
+            // authentication successful so generate jwt token
+            var token = generateJwtToken(user);
+
+            return new AuthenticateResponse(user, token);
         }
 
         public Task<IResult> DeleteAsync(int id)

@@ -40,7 +40,7 @@ namespace Business.Concrete
 
         public async Task<IDataResult<Todo>> GetById(int id)
         {
-            var result = await todoDal.GetAsync(id);
+            var result = await todoDal.GetByIdAsync(id);
             return new SuccessDataResult<Todo>(result);
         }
 
