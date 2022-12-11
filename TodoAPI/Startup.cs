@@ -35,14 +35,13 @@ namespace TodoAPI
 
             services.AddMemoryCache();
 
-            services.AddDbContext<TodoContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"), b => b.MigrationsAssembly("TodoAPI")));
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoAPI", Version = "v1" });
             });
-            
-            services.AddDependencyResolvers(new ICoreModule[] {new CoreModule()});
+
+            services.RegisterDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +68,7 @@ namespace TodoAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapGet("/test", (string name) => { return $"Hello {name}";});
+                endpoints.MapGet("api/test", (string name) => { return $"Hello {name}";});
             });
         }
     }
