@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Helpers;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -19,7 +20,12 @@ namespace TodoAPI.Controllers
             this.toDoManager = toDoManager;
 
         }
-
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            var data = AppSettingsHelper.GetValue("SqlServerConnectionString", "");
+            return Ok(data);
+        }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
