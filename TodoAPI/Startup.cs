@@ -1,6 +1,7 @@
 using Business.Concrete;
 using Core.DependencyResolvers;
 using Core.Extensions;
+using Core.Helpers;
 using Core.Utilities.Ioc;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
@@ -26,8 +27,7 @@ namespace TodoAPI
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            
+        {            
             services.AddScoped<ILogger, Logger<ToDoManager>>();
             
             services.AddControllers().AddJsonOptions(opt =>

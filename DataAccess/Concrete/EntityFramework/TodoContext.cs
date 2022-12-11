@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class TodoContext:DbContext
+    public class TodoContext : DbContext
     {
-        public TodoContext(DbContextOptions<TodoContext> options) : base(options)
+        public TodoContext()
         {
 
         }
-        public TodoContext() 
+        public TodoContext(DbContextOptions options) 
         {
 
         }
@@ -21,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-               .UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString", ""),
+               .UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString",""),
                    providerOptions => { providerOptions.EnableRetryOnFailure(5); });
             }
         }

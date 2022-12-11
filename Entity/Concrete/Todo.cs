@@ -19,7 +19,5 @@ namespace Entity.Concrete
         public string ImportanceLevel { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? DeadlineDate { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ICollection<TodoDetail> TodoDetails { get; set; }
     }
 }

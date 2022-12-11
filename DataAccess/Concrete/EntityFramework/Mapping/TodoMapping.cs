@@ -23,10 +23,6 @@ namespace DataAccess.Concrete.EntityFramework.Mapping
             builder.Property(t => t.UserId).IsRequired();
             builder.Property(t => t.TodoName).IsRequired().HasMaxLength(50);
             builder.Property(t => t.ImportanceLevel).HasMaxLength(15);
-
-            builder.HasOne(t => t.Category).WithMany(t => t.Todos).OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasMany(t => t.TodoDetails).WithOne().OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -10,6 +10,5 @@ namespace Entity.Concrete
         public string CategoryName { get; set; }
         public string CategoryDetail { get; set; }
         public DateTime CreateDate { get; set; }
-        public virtual ICollection<Todo> Todos {get;set;}
     }
 }
