@@ -8,13 +8,10 @@ using System.Threading.Tasks;
 namespace TodoAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/")]
+    [Route("api/[controller]/Todo")]
     public class TodoController : ControllerBase
     {
-
         private readonly IToDoService toDoManager;
-
-
         public TodoController(IToDoService toDoManager)
         {
             this.toDoManager = toDoManager;
