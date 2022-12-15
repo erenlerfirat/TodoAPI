@@ -1,11 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Core.Helpers;
+using Core.Extensions;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace TodoAPI.Controllers
@@ -23,16 +20,7 @@ namespace TodoAPI.Controllers
         [HttpGet("Test")]
         public IActionResult Test()
         {
-            var data = AppSettingsHelper.GetValue("SqlServerConnectionString", "");
-            string workingDirectory = Environment.CurrentDirectory;
-            // or: Directory.GetCurrentDirectory() gives the same result
-
-            // This will get the current PROJECT bin directory (ie ../bin/)
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-
-            // This will get the current PROJECT directory
-            string projectDirectory2 = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            return Ok(data);
+            return Ok("asdfgasdfg".Truncate(7));
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
