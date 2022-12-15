@@ -19,9 +19,9 @@ namespace DataAccess.Concrete.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {/*AppSettingsHelper.GetValue("SqlServerConnectionString","")*/
+            {
                 optionsBuilder
-               .UseSqlServer("Server=DG-FERENLER\\SQLEXPRESS;database=Todo;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True",
+               .UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString",""),
                    providerOptions => { providerOptions.EnableRetryOnFailure(5); });
             }
         }
