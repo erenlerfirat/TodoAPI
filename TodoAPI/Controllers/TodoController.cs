@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Attributes.JWT;
 using Core.Extensions;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace TodoAPI.Controllers
             this.toDoManager = toDoManager;
 
         }
+        [AuthorizeAttribute]
         [HttpGet("Test")]
         public IActionResult Test()
         {

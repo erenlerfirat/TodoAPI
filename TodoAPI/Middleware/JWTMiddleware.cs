@@ -12,11 +12,11 @@ namespace TodoAPI.Middleware
 {
     public class JwtMiddleware
     {
-        private readonly RequestDelegate _next;
+        private readonly RequestDelegate next;
 
         public JwtMiddleware(RequestDelegate next)
         {
-            _next = next;
+            this.next = next;
         }
 
         public async Task Invoke(HttpContext context, IUserService userService)
@@ -26,7 +26,7 @@ namespace TodoAPI.Middleware
             if (token != null)
                 AttachUserToContext(context, userService, token);
 
-            await _next(context);
+            await next(context);
         }
 
         private void AttachUserToContext(HttpContext context, IUserService userService, string token)
@@ -52,7 +52,7 @@ namespace TodoAPI.Middleware
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
                 // attach user to context on successful jwt validation
-                context.Items["User"] = userService.GetById(userId);
+                context.Items["User"] = userService.GetByIdAync(userId).Result.Data;
             }
             catch
             {

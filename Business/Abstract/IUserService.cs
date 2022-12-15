@@ -16,6 +16,5 @@ namespace Business.Abstract
         Task<IDataResult<List<User>>> GetAllAsync();
         Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
         IEnumerable<User> GetAll();
-        User GetById(int id);
     }
 }

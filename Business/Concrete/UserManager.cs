@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Entity.Concrete;
 using Core.Helpers;
 using Core.Utilities.Results;
@@ -42,9 +43,10 @@ namespace Business.Concrete
             return new AuthenticateResponse(user, token);
         }
 
-        public Task<IResult> DeleteAsync(int id)
+        public async Task<IResult> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await _userDal.DeleteAsync(id);
+            return new SuccessResult(Messages.Success);
         }
 
         public IEnumerable<User> GetAll()
@@ -52,19 +54,15 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<IDataResult<List<User>>> GetAllAsync()
+        public async Task<IDataResult<List<User>>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var result = await _userDal.GetAllAsync();
+            return new SuccessDataResult<List<User>> (result);
         }
-
-        public User GetById(int id)
+        public async Task<IDataResult<User>> GetByIdAync(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IDataResult<User>> GetByIdAync(int id)
-        {
-            throw new NotImplementedException();
+            var result = await _userDal.GetByIdAsync(id);
+            return new SuccessDataResult<User>(result);
         }
 
         public Task<IDataResult<User>> GetByMailAsync(string email)
@@ -72,9 +70,10 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<IResult> UpdateAsync(User user)
+        public async Task<IResult> UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            var result = await _userDal.UpdateAsync(user);
+            return new SuccessDataResult<User>(result);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Business.Abstract;
+﻿using Azure.Core;
+using Business.Abstract;
 using Core.Entity.Concrete;
+using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -29,6 +31,13 @@ namespace TodoAPI.Controllers
             var result = await userService.GetByIdAync(id);
             if (!result.Success)
                 return NotFound();
+            return Ok(result);
+        }
+        [HttpPost("Auth")]
+        public async Task<IActionResult> Authenticate(AuthenticateRequest request)
+        {
+            var result = await userService.Authenticate(request);
+            
             return Ok(result);
         }
 
