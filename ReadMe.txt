@@ -18,5 +18,5 @@ if you dont have you can download => [ dotnet tool install --global dotnet-ef ]
 
 You can specify a range of migrations by using the -to and -from options.
 
-5) In design time you need add connection string as an literal string into todocontext
+5) In design time you need change connection string as an literal string into todocontext OnConfiguring Method
 instead of configuration helper,Otherwise you'll get type initializer error .
