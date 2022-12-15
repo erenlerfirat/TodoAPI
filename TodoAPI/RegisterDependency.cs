@@ -22,6 +22,7 @@ namespace TodoAPI
             services.AddScoped<IUserDal,UserDal>();
 
             services.AddScoped<ICategoryDal,CategoryDal>();            
+            services.AddScoped<ICategoryService,CategoryManager>();            
 
         }
     }

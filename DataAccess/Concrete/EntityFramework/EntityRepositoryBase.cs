@@ -60,7 +60,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            var category = _context.Entry<TEntity>(entity);
+            var category = _context.Entry(entity);
             category.State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return entity;

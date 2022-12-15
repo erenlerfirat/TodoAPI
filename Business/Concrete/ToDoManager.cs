@@ -45,9 +45,8 @@ namespace Business.Concrete
         }
 
         public async Task<IDataResult<List<Todo>>> GetAll()
-        {
-            Expression<Func<Todo, bool>> predicate = p => true;
-            var result = await todoDal.GetAllAsync(predicate);
+        {            
+            var result = await todoDal.GetAllAsync();
             return new SuccessDataResult<List<Todo>>(result);
         }
 
