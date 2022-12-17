@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMig : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -71,7 +71,8 @@ namespace DataAccess.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordSalt = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

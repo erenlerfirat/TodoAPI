@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20221215182006_InitMig")]
-    partial class InitMig
+    [Migration("20221217191125_UserModif")]
+    partial class UserModif
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,10 @@ namespace DataAccess.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordSalt")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")

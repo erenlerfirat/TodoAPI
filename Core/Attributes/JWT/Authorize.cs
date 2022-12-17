@@ -11,7 +11,6 @@ namespace Core.Attributes.JWT
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var x = context.HttpContext.Items["User"];
             var user = (User)context.HttpContext.Items["User"];
             if (user == null)
             {

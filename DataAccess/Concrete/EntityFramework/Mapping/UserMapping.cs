@@ -14,7 +14,8 @@ namespace DataAccess.Concrete.EntityFramework.Mapping
             builder.Property(u => u.MiddleName).IsRequired().HasMaxLength(50);
             builder.Property(u => u.LastName).IsRequired().HasMaxLength(50);
             builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
-            builder.Property(u => u.Password).IsRequired().HasMaxLength(50);
+            builder.Property(u => u.PasswordHash).IsRequired().HasMaxLength(200);
+            builder.Property(u => u.PasswordSalt).IsRequired().HasMaxLength(200);
             builder.Property(t => t.CreateDate).HasColumnType(EntityColumnTypes.Date);
         }
     }
