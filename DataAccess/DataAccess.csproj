@@ -6,8 +6,11 @@
 
   <ItemGroup>
     <Compile Remove="Concrete\EntityFramework\Migrations\**" />
+    <Compile Remove="Concrete\EntityFramework\TodoContext\**" />
     <EmbeddedResource Remove="Concrete\EntityFramework\Migrations\**" />
+    <EmbeddedResource Remove="Concrete\EntityFramework\TodoContext\**" />
     <None Remove="Concrete\EntityFramework\Migrations\**" />
+    <None Remove="Concrete\EntityFramework\TodoContext\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Entity\Entity.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Concrete\EntityFramework\TodoContext\" />
   </ItemGroup>
 
 </Project>
