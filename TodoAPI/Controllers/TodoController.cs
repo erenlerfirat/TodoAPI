@@ -51,7 +51,7 @@ namespace TodoAPI.Controllers
 
         }
 
-        [HttpDelete("Delete{id}")]
+        [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await toDoManager.Delete(id);
