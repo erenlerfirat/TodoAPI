@@ -18,11 +18,11 @@ namespace TodoAPI.Controllers
             this.toDoManager = toDoManager;
 
         }
-        [AuthorizeAttribute]
+        [Authorize]
         [HttpGet("Test")]
         public IActionResult Test()
         {
-            return Ok("asdfgasdfg".Truncate(7));
+            return Ok("TestMethod".Truncate(5));
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
