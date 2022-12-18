@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TodoAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/User")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;

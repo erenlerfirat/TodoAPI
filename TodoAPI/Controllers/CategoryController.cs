@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TodoAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/Category")]
+    [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
