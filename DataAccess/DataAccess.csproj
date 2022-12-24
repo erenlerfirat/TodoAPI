@@ -5,15 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Concrete\EntityFramework\Migrations\**" />
-    <Compile Remove="Concrete\EntityFramework\TodoContext\**" />
-    <EmbeddedResource Remove="Concrete\EntityFramework\Migrations\**" />
-    <EmbeddedResource Remove="Concrete\EntityFramework\TodoContext\**" />
-    <None Remove="Concrete\EntityFramework\Migrations\**" />
-    <None Remove="Concrete\EntityFramework\TodoContext\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

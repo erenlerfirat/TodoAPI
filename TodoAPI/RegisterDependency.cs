@@ -2,7 +2,8 @@
 using Business.Concrete;
 using Core.Helpers;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
+using DataAccess.Concrete;
+using DataAccess.Concrete.Dal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -3,7 +3,7 @@ using Core.Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccess.Concrete.EntityFramework.Mapping
+namespace DataAccess.Concrete.Mapping
 {
     public class UserMapping : IEntityTypeConfiguration<User>
     {

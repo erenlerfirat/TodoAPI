@@ -7,11 +7,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete.EntityFramework
+namespace DataAccess.Concrete
 {
-    public class EntityRepositoryBase<TEntity,TContext> : IEntityRepository<TEntity>
+    public class EntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TContext : DbContext
-        where TEntity : class ,IEntity, new()
+        where TEntity : class, IEntity, new()
     {
         private readonly TContext _context;
         private readonly IQueryable _queryable;
@@ -48,14 +48,15 @@ namespace DataAccess.Concrete.EntityFramework
         {
             return await _context.FindAsync<TEntity>(id);
         }
-        
+
         public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
-           return await Task.Run(() => {
+            return await Task.Run(() =>
+            {
                 return filter == null
                         ? _context.Set<TEntity>().ToList()
                         : _context.Set<TEntity>().Where(filter).ToList();
-            });            
+            });
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
@@ -65,6 +66,6 @@ namespace DataAccess.Concrete.EntityFramework
             await _context.SaveChangesAsync();
             return entity;
         }
-        
+
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Core.Entity.Concrete;
 using Core.Helpers;
-using DataAccess.Concrete.EntityFramework.Mapping;
+using DataAccess.Concrete.Mapping;
 using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Concrete.EntityFramework
+namespace DataAccess.Concrete
 {
     public class TodoContext : DbContext
     {
@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
 
         }
-        public TodoContext(DbContextOptions options) 
+        public TodoContext(DbContextOptions options)
         {
 
         }
@@ -21,18 +21,17 @@ namespace DataAccess.Concrete.EntityFramework
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-               .UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString",""),
+               .UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString", ""),
                    providerOptions => { providerOptions.EnableRetryOnFailure(5); });
             }
         }
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TodoMapping());
             modelBuilder.ApplyConfiguration(new TodoDetailMapping());
             modelBuilder.ApplyConfiguration(new CategoryMapping());
-            
+            modelBuilder.ApplyConfiguration(new UserMapping());
+
         }
         public DbSet<Todo> Todos { get; set; }
         public DbSet<Category> Categories { get; set; }

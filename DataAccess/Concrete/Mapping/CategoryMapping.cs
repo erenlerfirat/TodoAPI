@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete.EntityFramework.Mapping
+namespace DataAccess.Concrete.Mapping
 {
     public class CategoryMapping : IEntityTypeConfiguration<Category>
     {
@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework.Mapping
             builder.Property(c => c.CategoryDetail);
             builder.Property(c => c.CreateDate).HasColumnType(EntityColumnTypes.Date);
             builder.Property(c => c.CategoryName).IsRequired().HasMaxLength(50);
-            
+
         }
     }
 }

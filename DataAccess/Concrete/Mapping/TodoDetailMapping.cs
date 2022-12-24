@@ -8,15 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete.EntityFramework.Mapping
+namespace DataAccess.Concrete.Mapping
 {
     public class TodoDetailMapping : IEntityTypeConfiguration<TodoDetail>
     {
         public void Configure(EntityTypeBuilder<TodoDetail> builder)
         {
             builder.HasKey(t => t.Id);
-            builder.Property(t=>t.ContentDetail).IsRequired();
-            builder.Property(t => t.CreateDate).HasColumnType(EntityColumnTypes.Date);            
+            builder.Property(t => t.ContentDetail).IsRequired();
+            builder.Property(t => t.CreateDate).HasColumnType(EntityColumnTypes.Date);
 
         }
     }
