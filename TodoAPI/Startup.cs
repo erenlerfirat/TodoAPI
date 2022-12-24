@@ -3,7 +3,7 @@ using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Helpers;
 using Core.Utilities.Ioc;
-using DataAccess.Concrete.EntityFramework;
+using DataAccess.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

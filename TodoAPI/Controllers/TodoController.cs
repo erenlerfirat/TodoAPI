@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Attributes.JWT;
+using Core.Constants;
 using Core.Extensions;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,13 @@ namespace TodoAPI.Controllers
         public IActionResult Test()
         {
             return Ok("TestMethod".Truncate(5));
+        }
+        [HttpGet("HtmlContent")]
+        public ContentResult Html()
+        {
+            string html = Template.Html;
+            var result = base.Content(html, "text/html");
+            return result;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
