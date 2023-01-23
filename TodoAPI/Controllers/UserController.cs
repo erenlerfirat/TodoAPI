@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Core.Entity.Concrete;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +43,8 @@ namespace TodoAPI.Controllers
         [HttpPut("Add")]
         public async Task<IActionResult> Add(User user)
         {
+            var salt = user.Password;
+            var hash = user.Password;
             var result = await userService.AddAsync(user);
             if (!result.Success)
                 return NotFound();

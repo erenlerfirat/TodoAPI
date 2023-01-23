@@ -33,8 +33,8 @@ namespace Business.Concrete
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model)
         {
             var user = await _userDal.SingleOrDefaultAsync(x => x.UserName == model.Username && x.Password == model.Password);
-            
-            // return null if user not found
+
+            // validate the password then forward a token to user
             if (user == null) return null;
 
             // authentication successful so generate jwt token
