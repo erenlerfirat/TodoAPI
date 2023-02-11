@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Core.Helpers
 {
-    public static class SecretHasher
+    public static class HashHelper
     {
         private const int SaltSize = 16; // 128 bits
         private const int KeySize = 32; // 256 bits
@@ -12,11 +12,12 @@ namespace Core.Helpers
 
         private const char segmentDelimiter = ':';
 
-        public static string Hash(string password)
+        public static string Hash(string password , out string passwordHash)
         {
             byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
             byte[] hash = Rfc2898DeriveBytes.Pbkdf2(password, salt, Iterations, Algorithm, KeySize);
-            return string.Join(segmentDelimiter, Convert.ToHexString(hash), Convert.ToHexString(salt), Iterations, Algorithm);
+            passwordHash = string.Join(segmentDelimiter, Convert.ToHexString(hash), Convert.ToHexString(salt), Iterations, Algorithm);
+            return passwordHash;
         }
 
         public static bool Verify(string password, string hashString)
