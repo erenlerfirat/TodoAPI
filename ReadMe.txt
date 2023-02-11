@@ -4,7 +4,7 @@ Reminder, this commands only applicable for  => CLI Commands ( Not the package m
 
 Before start to write commands you should have ef-core design tools /Check it => [ dotnet-ef ]
 
-if you dont have you can download => [ dotnet tool install --global dotnet-ef ]
+if you dont have you can download => [ dotnet tool install --global dotnet-ef ] || or update if you receive error [ dotnet tool update --global dotnet-ef ]
 
 0) Change you current directory to DataAccess / OR You can the flag --project DataAccess 
 

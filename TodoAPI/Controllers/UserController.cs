@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
 using Core.Entity.Concrete;
+using Core.Helpers;
 using Entity.Concrete;
+using Entity.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -41,11 +43,18 @@ namespace TodoAPI.Controllers
         }
 
         [HttpPut("Add")]
-        public async Task<IActionResult> Add(User user)
+        public async Task<IActionResult> Add(UserForRegisterDto userDto)
         {
-            var salt = user.Password;
-            var hash = user.Password;
+            HashHelper.Hash(userDto.Password,out string passwordHash);
+
+            var user = new User { Email = userDto.Email ,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                MiddleName= userDto.MiddleName,
+                PasswordHash = passwordHash,
+            };            
             var result = await userService.AddAsync(user);
+
             if (!result.Success)
                 return NotFound();
             return Ok(result);

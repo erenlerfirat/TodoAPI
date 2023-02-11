@@ -32,7 +32,7 @@ namespace Business.Concrete
 
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model)
         {
-            var user = await _userDal.SingleOrDefaultAsync(x => x.UserName == model.Username && x.Password == model.Password);
+            var user = await _userDal.SingleOrDefaultAsync(x => x.UserName == model.Username);
 
             // validate the password then forward a token to user
             if (user == null) return null;
