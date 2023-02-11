@@ -30,14 +30,14 @@ namespace Business.Concrete
             return new ErrorResult("Error");
         }
 
-        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model)
+        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
         {
-            var user = await _userDal.SingleOrDefaultAsync(x => x.UserName == model.Username);
+            var user = await _userDal.SingleOrDefaultAsync(x => x.UserName == request.Username);
 
-            // validate the password then forward a token to user
-            if (user == null) return null;
+            bool isPasswordValid = HashHelper.Verify(request.Password,user.PasswordHash);
+                        
+            if (!isPasswordValid) return null;
 
-            // authentication successful so generate jwt token
             var token = TokenHelper.GenerateJwtToken(user);
 
             return new AuthenticateResponse(user, token);
