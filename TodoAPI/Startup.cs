@@ -27,8 +27,7 @@ namespace TodoAPI
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.AddScoped<ILogger, Logger<ToDoManager>>();
+        {
             
             services.AddControllers().AddJsonOptions(opt =>
             opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
@@ -80,7 +79,6 @@ namespace TodoAPI
             app.UseHttpsRedirection();
 
             app.UseMiddleware<JwtMiddleware>();
-            app.UseMiddleware<RequestLoggingMiddleware>();
 
             app.UseRouting();
 
