@@ -23,10 +23,9 @@ namespace Business.Concrete
             this.todoDal = todoDal;
         }
 
-        [ValidationAspect(typeof(TodoValidator))]
+        [ValidationAspect(typeof(TodoValidator))] // TODO : To be tested
         public async Task<IResult> Create(Todo todo)
-        {
-            ValidationTool.Validate(new TodoValidator(), todo);
+        {            
             await todoDal.AddAsync(todo);
             return new SuccessResult();
         }
