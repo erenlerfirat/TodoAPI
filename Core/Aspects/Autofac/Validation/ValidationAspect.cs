@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Castle.DynamicProxy;
+﻿using Castle.DynamicProxy;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Messages;
 using FluentValidation;
+using System;
+using System.Linq;
 
 namespace Core.Aspects.Autofac.Validation
 {
     public class ValidationAspect : MethodInterception
     {
-        private Type _validatorType;
+        private readonly Type _validatorType;
         public ValidationAspect(Type validatorType)
         {
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
             {
-                throw new System.Exception(AspectMessages.WrongValidationType);
+                throw new Exception(AspectMessages.WrongValidationType); // TODO define a custom validation exception
             }
 
             _validatorType = validatorType;
