@@ -12,7 +12,7 @@ namespace DataAccess.Concrete
         {
 
         }
-        public TodoContext(DbContextOptions options)
+        public TodoContext(DbContextOptions options) :base(options)
         {
 
         }
