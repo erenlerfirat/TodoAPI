@@ -33,8 +33,14 @@ namespace TodoAPI
             opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
             services.AddMemoryCache();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
 
-            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoAPI", Version = "v1" });
@@ -72,7 +78,7 @@ namespace TodoAPI
                 { c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoAPI v1");
                   c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
                 });
-                app.UseCors(a => { a.AllowCredentials().WithOrigins("devUrl", "devUrl2", "stageUrl").AllowAnyMethod().AllowAnyHeader();});
+                app.UseCors("CorsPolicy");
             }
 
             app.UseAuthentication();            
