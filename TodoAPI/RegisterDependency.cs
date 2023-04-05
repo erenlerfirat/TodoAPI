@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Core.Aspects.Log;
 using Core.Helpers;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
@@ -13,6 +14,8 @@ namespace TodoAPI
     {
         public static void RegisterDependencies(this IServiceCollection services) 
         {
+            services.AddSingleton<ILog, Logger>();
+
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString",""),
                 b => b.MigrationsAssembly("TodoAPI")));
 

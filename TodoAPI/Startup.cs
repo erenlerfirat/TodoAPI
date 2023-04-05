@@ -1,17 +1,10 @@
-using Business.Concrete;
-using Core.DependencyResolvers;
-using Core.Extensions;
-using Core.Helpers;
-using Core.Utilities.Ioc;
-using DataAccess.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System;
 using TodoAPI.Middleware;
 
 namespace TodoAPI
@@ -60,7 +53,7 @@ namespace TodoAPI
                             Type = ReferenceType.SecurityScheme,
                                 Id = "Bearer"
                         }
-                    }, new string[]{}}
+                    }, Array.Empty<string>()}
                 });
             });
 

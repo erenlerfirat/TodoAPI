@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Log;
 using Core.Attributes.JWT;
 using Core.Constants;
 using Core.Extensions;
@@ -14,9 +15,11 @@ namespace TodoAPI.Controllers
     public class TodoController : ControllerBase
     {
         private readonly IToDoService toDoManager;
-        public TodoController(IToDoService toDoManager)
+        private readonly ILog logger;
+        public TodoController(IToDoService toDoManager , ILog logger)
         {
             this.toDoManager = toDoManager;
+            this.logger = logger;
 
         }
         [Authorize]
@@ -28,6 +31,8 @@ namespace TodoAPI.Controllers
         [HttpGet("HtmlContent")]
         public ContentResult Html()
         {
+            logger.Info("test log ------ ");
+
             string html = Template.Html;
             var result = base.Content(html, "text/html");
             return result;
