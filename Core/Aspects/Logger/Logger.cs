@@ -35,7 +35,7 @@ namespace Core.Aspects.Log
             string assembly = typeof(T).Assembly.GetName().Name;
             string currentClass = typeof(T).Name;
 
-            target.FileName = $"c:\\Logs\\TODO\\${assembly}\\${today}\\${currentHour}.log";
+            target.FileName = "c:\\Logs\\TODO\\"+assembly+"\\"+today+"\\"+currentHour+".log";
 
             target.Layout = currentClass +
                 "[ ${level:uppercase=true}]  ${message} ${exception:format=tostring}"
