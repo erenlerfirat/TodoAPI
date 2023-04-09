@@ -6,7 +6,7 @@ namespace Core.Helpers
 {
     public static class AppSettingsHelper
     {   
-        private static readonly IConfigurationRoot Configuration = new ConfigurationBuilder()
+        public static readonly IConfigurationRoot Configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.Development.json").Build();
 

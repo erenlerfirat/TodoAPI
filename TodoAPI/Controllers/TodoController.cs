@@ -15,8 +15,8 @@ namespace TodoAPI.Controllers
     public class TodoController : ControllerBase
     {
         private readonly IToDoService toDoManager;
-        private readonly ILog logger;
-        public TodoController(IToDoService toDoManager , ILog logger)
+        private readonly ILog<TodoController> logger;
+        public TodoController(IToDoService toDoManager , ILog<TodoController> logger)
         {
             this.toDoManager = toDoManager;
             this.logger = logger;
@@ -31,7 +31,7 @@ namespace TodoAPI.Controllers
         [HttpGet("HtmlContent")]
         public ContentResult Html()
         {
-            logger.Warn("test log ------ ");
+            logger.Info("test log ------ ");
 
             string html = Template.Html;
             var result = base.Content(html, "text/html");

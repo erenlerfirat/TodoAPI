@@ -1,6 +1,6 @@
 ﻿namespace Core.Aspects.Log
 {
-    public interface ILog
+    public interface ILog<T>
     {
         void Info(string message);
         void Error(string message);

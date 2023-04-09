@@ -14,7 +14,7 @@ namespace TodoAPI
     {
         public static void RegisterDependencies(this IServiceCollection services) 
         {
-            services.AddSingleton<ILog, Logger>();
+            services.AddSingleton(typeof(ILog<>),typeof(Logger<>));
 
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString",""),
                 b => b.MigrationsAssembly("TodoAPI")));

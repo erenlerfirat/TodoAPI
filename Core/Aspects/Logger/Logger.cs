@@ -1,21 +1,53 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Castle.Core.Configuration;
+using Core.Helpers;
+using Microsoft.Extensions.Configuration;
 using NLog;
+using NLog.Config;
 using NLog.Extensions.Logging;
-using System.IO;
+using NLog.Filters;
+using NLog.Layouts;
+using NLog.Targets;
+using System;
 
 namespace Core.Aspects.Log
 {
-    public class Logger : ILog
+    public class Logger<T> : ILog<T>
     {
-        private static readonly IConfigurationRoot Configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.Development.json").Build();
-
+        private readonly IConfigurationRoot Configuration = AppSettingsHelper.Configuration;
         private readonly ILogger _logger;
         public Logger()
         {
+            FormatLogConfig();
+            _logger = LogManager.GetLogger(typeof(T).FullName);
+        }
+
+        private void FormatLogConfig()
+        {
             LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
-            _logger = LogManager.GetCurrentClassLogger();
+
+            var configuration = new LoggingConfiguration();
+            var target = new FileTarget();
+
+            string fullDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffff");
+            string today = DateTime.Now.ToString("yyyy-MM-dd");
+            string currentHour = DateTime.Now.ToString("yyyy-MM-ddTHH");
+
+            string assembly = typeof(T).Assembly.GetName().Name;
+            string currentClass = typeof(T).Name;
+
+            target.FileName = $"c:\\Logs\\TODO\\${assembly}\\${today}\\${currentHour}.log";
+
+            target.Layout = currentClass +
+                "[ ${level:uppercase=true}]  ${message} ${exception:format=tostring}"
+                + fullDate;
+
+            var rule = new LoggingRule("*", LogLevel.Trace, target);
+
+            configuration.LoggingRules.Add(rule);
+
+            configuration.AddTarget("BaseFile", target);
+
+            LogManager.Configuration = configuration;
         }
 
         public void Error(string message)
