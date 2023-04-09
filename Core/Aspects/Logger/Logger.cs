@@ -1,10 +1,22 @@
-﻿using NLog;
+﻿using Microsoft.Extensions.Configuration;
+using NLog;
+using NLog.Extensions.Logging;
+using System.IO;
 
 namespace Core.Aspects.Log
 {
     public class Logger : ILog
     {
-        private readonly ILogger _logger =  LogManager.GetCurrentClassLogger();
+        private static readonly IConfigurationRoot Configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.Development.json").Build();
+
+        private readonly ILogger _logger;
+        public Logger()
+        {
+            LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
+            _logger = LogManager.GetCurrentClassLogger();
+        }
 
         public void Error(string message)
         {

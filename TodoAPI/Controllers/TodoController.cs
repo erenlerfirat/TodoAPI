@@ -31,7 +31,7 @@ namespace TodoAPI.Controllers
         [HttpGet("HtmlContent")]
         public ContentResult Html()
         {
-            logger.Info("test log ------ ");
+            logger.Warn("test log ------ ");
 
             string html = Template.Html;
             var result = base.Content(html, "text/html");

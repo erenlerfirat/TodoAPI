@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NLog;
-using NLog.Web;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace TodoAPI
@@ -11,13 +9,10 @@ namespace TodoAPI
     {
         public static void Main(string[] args)
         {
-            
-
             CreateHostBuilder(args).Build().Run();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>{webBuilder.UseStartup<Startup>();})
-            .ConfigureLogging(logger=> { logger.ClearProviders();logger.SetMinimumLevel(LogLevel.Trace);})
-            .UseNLog();
+            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+            .ConfigureLogging(logger=>{ logger.ClearProviders(); logger.SetMinimumLevel(LogLevel.Information);});
     }
 }
