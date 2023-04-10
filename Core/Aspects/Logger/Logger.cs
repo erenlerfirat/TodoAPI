@@ -1,26 +1,32 @@
-﻿using Castle.Core.Configuration;
-using Core.Helpers;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using NLog;
 using NLog.Config;
 using NLog.Extensions.Logging;
-using NLog.Filters;
-using NLog.Layouts;
 using NLog.Targets;
+using NLog.Web;
 using System;
+using System.IO;
+using ILogger = NLog.ILogger;
 
 namespace Core.Aspects.Log
 {
-    public class Logger<T> : ILog<T>
+    public class Logger<T> : ILog<T> ,IDisposable
     {
-        private readonly IConfigurationRoot Configuration = AppSettingsHelper.Configuration;
-        private readonly ILogger _logger;
+        private readonly IConfigurationRoot Configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.Development.json").Build();
+        private readonly ILogger _logger; 
         public Logger()
         {
             FormatLogConfig();
-            _logger = LogManager.GetLogger(typeof(T).FullName);
+            _logger = LogManager.GetCurrentClassLogger();
         }
-
+        public void Dispose()
+        {
+            LogManager.LogFactory.Dispose();
+            
+            GC.SuppressFinalize(this);
+        }
         private void FormatLogConfig()
         {
             LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
@@ -35,17 +41,17 @@ namespace Core.Aspects.Log
             string assembly = typeof(T).Assembly.GetName().Name;
             string currentClass = typeof(T).Name;
 
-            target.FileName = "c:\\Logs\\TODO\\"+assembly+"\\"+today+"\\"+currentHour+".log";
+            target.FileName = "c:\\Logs\\TODO\\" + assembly + "\\" + today + "\\" + currentHour + ".log";
 
-            target.Layout = currentClass +
-                "[ ${level:uppercase=true}]  ${message} ${exception:format=tostring}"
-                + fullDate;
+            target.Layout = currentClass + "  " + fullDate + "[${level:uppercase=true}] ${message} ${exception:format=tostring}";
 
             var rule = new LoggingRule("*", LogLevel.Trace, target);
 
             configuration.LoggingRules.Add(rule);
 
             configuration.AddTarget("BaseFile", target);
+
+            LogManager.ReconfigExistingLoggers();
 
             LogManager.Configuration = configuration;
         }
@@ -69,6 +75,7 @@ namespace Core.Aspects.Log
         {
             _logger.Warn(message);
         }
+
     }
     public enum Log_Level
     {

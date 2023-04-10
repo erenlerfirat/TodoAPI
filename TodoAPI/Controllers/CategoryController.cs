@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
 using Business.Constants;
+using Core.Aspects.Log;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -11,9 +13,11 @@ namespace TodoAPI.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly ILog<CategoryController> logger;
+        public CategoryController(ICategoryService categoryService, ILog<CategoryController> logger)
         {
             _categoryService = categoryService;
+            this.logger = logger;
         }
         [HttpPost("Add")]
         public async Task<IActionResult> Create(Category category)
@@ -28,6 +32,7 @@ namespace TodoAPI.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
+            logger.Info("GetAll");
             var result = await _categoryService.GetAllAsync();
 
             if (result.Success)

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Aspects.Log;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
@@ -12,9 +13,11 @@ namespace Business.Concrete
     public class CategoryManager : ICategoryService
     {
         private readonly ICategoryDal categoryDal;
-        public CategoryManager(ICategoryDal categoryDal)
+        private readonly ILog<CategoryManager> logger;
+        public CategoryManager(ICategoryDal categoryDal, ILog<CategoryManager> logger)
         {
             this.categoryDal = categoryDal;
+            this.logger = logger;
         }
         
         public async Task<IResult> CreateAsync(Category category)
@@ -37,6 +40,7 @@ namespace Business.Concrete
 
         public async Task<IDataResult<List<Category>>> GetAllAsync()
         {
+            logger.Info("GetAll ");
             Expression<Func<Category, bool>> predicate = p => true;
             var result = await categoryDal.GetAllAsync(predicate);
             return new SuccessDataResult<List<Category>>(result);

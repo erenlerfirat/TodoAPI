@@ -40,6 +40,7 @@ namespace TodoAPI.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
+            logger.Info("test log ------ ");
             var result = await toDoManager.GetAll();
             if (!result.Success)
                 return BadRequest(Messages.Error);
