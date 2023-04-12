@@ -8,6 +8,5 @@ namespace Core.Aspects.Log
         void Error(string message);
         void Fatal(string message);
         void Warn(string message);
-        void Dispose();
     }
 }

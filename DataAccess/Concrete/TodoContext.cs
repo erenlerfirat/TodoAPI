@@ -21,7 +21,7 @@ namespace DataAccess.Concrete
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-               .UseSqlServer("Server=DG-FERENLER\\SQLEXPRESS;database=Todo;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;Application Name=Api",
+               .UseSqlServer(AppSettingsHelper.GetValue("SqlServerConnectionString",""),
                    providerOptions => { providerOptions.EnableRetryOnFailure(5); });
             }
         }
