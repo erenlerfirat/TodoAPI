@@ -40,7 +40,7 @@ namespace TodoAPI.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            logger.Info("test log ------ ");
+            logger.Info("GetAll");
             var result = await toDoManager.GetAll();
             if (!result.Success)
                 return BadRequest(Messages.Error);
@@ -50,6 +50,7 @@ namespace TodoAPI.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var result = await toDoManager.GetById(id);
+            logger.Info("Get");
             if (!result.Success)
                 return BadRequest(Messages.Error);
             return Ok(result.Data);
@@ -59,6 +60,7 @@ namespace TodoAPI.Controllers
         public async Task<IActionResult> PostTodo([FromBody] Todo todo)
         {
             var result = await toDoManager.Create(todo);
+            logger.Info("PostTodo");
             if (!result.Success)
                 return BadRequest(Messages.Error);
             return Ok(Messages.Success);
