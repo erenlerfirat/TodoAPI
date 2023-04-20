@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Business.Constants;
+using Core.Constants;
 using Core.Entity.Concrete;
 using Core.Helpers;
 using Core.Utilities.Results;
@@ -30,17 +30,17 @@ namespace Business.Concrete
             return new ErrorResult("Error");
         }
 
-        public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
+        public async Task<IDataResult<AuthenticateResponse>> Authenticate(AuthenticateRequest request)
         {
             var user = await _userDal.SingleOrDefaultAsync(x => x.UserName == request.Username);
 
             bool isPasswordValid = HashHelper.Verify(request.Password,user.PasswordHash);
                         
-            if (!isPasswordValid) return null;
+            if (!isPasswordValid) return new ErrorDataResult<AuthenticateResponse>(Messages.Error);
 
             var token = TokenHelper.GenerateJwtToken(user);
 
-            return new AuthenticateResponse(user, token);
+            return new SuccessDataResult<AuthenticateResponse>(new AuthenticateResponse(user, token));
         }
 
         public async Task<IResult> DeleteAsync(int id)
