@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entity.Concrete;
 
 namespace TodoAPI.Middleware
 {
@@ -55,7 +56,8 @@ namespace TodoAPI.Middleware
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
                 // attach user to context on successful jwt validation
-                context.Items["User"] = userService.GetByIdAync(userId).Result.Data;
+                var user = userService.GetByIdAync(userId).Result.Data;
+                context.Items["UserLogin"] = new UserLoginDto { Email = user.Email, UserName = user.UserName, Token = jwtToken.ToString() };
             }
             catch (Exception ex) 
             {

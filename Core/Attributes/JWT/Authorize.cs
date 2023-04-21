@@ -9,9 +9,13 @@ namespace Core.Attributes.JWT
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {
+        public AuthorizeAttribute(string role = null)
+        {
+            
+        }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = (User)context.HttpContext.Items["User"];
+            var user = (UserLoginDto)context.HttpContext.Items["UserLogin"];
             if (user == null)
             {
                 // not logged in
