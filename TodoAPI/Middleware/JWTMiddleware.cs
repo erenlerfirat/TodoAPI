@@ -15,12 +15,10 @@ namespace TodoAPI.Middleware
     public class JwtMiddleware
     {
         private readonly RequestDelegate next;
-        private readonly ILog<JwtMiddleware> _logger;
 
-        public JwtMiddleware(RequestDelegate next, ILog<JwtMiddleware> logger)
+        public JwtMiddleware(RequestDelegate next)
         {
             this.next = next;
-            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context, IUserService userService)
@@ -61,7 +59,6 @@ namespace TodoAPI.Middleware
             }
             catch (Exception ex) 
             {
-                _logger.Error($"JWTMiddleware fail {ex}");
                 // do nothing if jwt validation fails
                 // user is not attached to context so request won't have access to secure routes
             }

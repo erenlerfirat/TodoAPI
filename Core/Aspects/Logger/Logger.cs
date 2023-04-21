@@ -18,54 +18,52 @@ namespace Core.Aspects.Log
             .AddJsonFile("appsettings.Development.json").Build();
         public Logger()
         {
+            LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
             _logger = LogManager.GetCurrentClassLogger();
         }
-        private void FormatLogConfig()
-        {
-            LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
-            var configuration = new LoggingConfiguration();
-            var target = new FileTarget();
-            string fullDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffff");
-            string today = DateTime.Now.ToString("yyyy-MM-dd");
-            string currentHour = DateTime.Now.ToString("yyyy-MM-ddTHH");
-            string assembly = typeof(T).Assembly.GetName().Name;
-            string currentClass = typeof(T).Name;
+        //private void FormatLogConfig()
+        //{
+        //    LogManager.Configuration = new NLogLoggingConfiguration(Configuration.GetSection("NLog"));
+        //    var configuration = new LoggingConfiguration();
+        //    var target = new FileTarget();
+        //    string fullDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffff");
+        //    string today = DateTime.Now.ToString("yyyy-MM-dd");
+        //    string currentHour = DateTime.Now.ToString("yyyy-MM-ddTHH");
+        //    string assembly = typeof(T).Assembly.GetName().Name;
+        //    string currentClass = typeof(T).Name;
 
-            target.FileName = "c:\\Logs\\TODO\\" + assembly + "\\" + today + "\\" + currentHour + ".log";
+        //    target.FileName = "c:\\Logs\\TODO\\" + assembly + "\\" + today + "\\" + currentHour + ".log";
 
-            target.Layout = "[${level:uppercase=true}] " + fullDate + "  " + currentClass + " : ${message} ${exception:format=tostring}";
+        //    target.Layout = "[${level:uppercase=true}] " + fullDate + "  " + currentClass + " : ${message} ${exception:format=tostring}";
 
-            var rule = new LoggingRule("*", LogLevel.Trace, target);
+        //    var rule = new LoggingRule("*", LogLevel.Trace, target);
 
-            configuration.LoggingRules.Add(rule);
+        //    configuration.LoggingRules.Add(rule);
 
-            configuration.AddTarget("BaseFile", target);
+        //    configuration.AddTarget("BaseFile", target);
 
-            LogManager.ReconfigExistingLoggers();
+        //    LogManager.ReconfigExistingLoggers();
 
-            LogManager.Configuration = configuration;
-        }
+        //    LogManager.Configuration = configuration;
+        //}
 
         public void Error(string message)
         {
-            FormatLogConfig();
             _logger.Error(message);
         }
 
         public void Fatal(string message)
         {
-            FormatLogConfig();
             _logger.Fatal(message);
         }
 
         public void Info(string message)
         {
-            FormatLogConfig();
             _logger.Info(message);
         }
 
         public void Warn(string message)
-        {   FormatLogConfig();
+        {
             _logger.Warn(message);
         }
     }
