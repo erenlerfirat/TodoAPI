@@ -1,7 +1,7 @@
 ﻿using Core.Entity.Concrete;
 using Core.Helpers;
 using DataAccess.Concrete.Mapping;
-using Entity.Concrete;
+using Entity.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete

@@ -1,5 +1,5 @@
 ﻿using DataAccess.Abstract;
-using Entity.Concrete;
+using Entity.Domain;
 
 namespace DataAccess.Concrete.Dal
 {

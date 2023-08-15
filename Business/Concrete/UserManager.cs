@@ -4,7 +4,7 @@ using Core.Entity.Concrete;
 using Core.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using Entity.Concrete;
+using Entity.Domain;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

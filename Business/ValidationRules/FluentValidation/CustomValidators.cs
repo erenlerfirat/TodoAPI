@@ -1,4 +1,4 @@
-﻿using Entity.Concrete;
+﻿using Entity.Domain;
 using FluentValidation;
 using System.Text.RegularExpressions;
 

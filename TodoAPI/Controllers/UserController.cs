@@ -1,8 +1,8 @@
 ﻿using Business.Abstract;
 using Core.Entity.Concrete;
 using Core.Helpers;
-using Entity.Concrete;
-using Entity.Dto;
+using Entity.Domain;
+using Entity.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

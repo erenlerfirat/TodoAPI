@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Aspects.Log;
 using Core.Constants;
-using Entity.Concrete;
+using Entity.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

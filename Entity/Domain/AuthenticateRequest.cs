@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Entity.Concrete
+﻿namespace Entity.Domain
 {
     public class AuthenticateRequest
     {

@@ -3,7 +3,7 @@ using Core.Aspects.Log;
 using Core.Attributes.JWT;
 using Core.Constants;
 using Core.Extensions;
-using Entity.Concrete;
+using Entity.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

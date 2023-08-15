@@ -4,7 +4,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Aspects.Log;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using Entity.Concrete;
+using Entity.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

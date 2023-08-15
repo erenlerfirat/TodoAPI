@@ -1,6 +1,6 @@
 ﻿using Core.Entity.Concrete;
 
-namespace Entity.Concrete
+namespace Entity.Domain
 {
     public class AuthenticateResponse
     {

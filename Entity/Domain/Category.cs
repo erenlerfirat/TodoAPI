@@ -1,8 +1,7 @@
 ﻿using Core.Entity;
 using System;
-using System.Collections.Generic;
 
-namespace Entity.Concrete
+namespace Entity.Domain
 {
     public class Category : IEntity
     {

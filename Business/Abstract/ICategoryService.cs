@@ -1,5 +1,5 @@
 ﻿using Core.Utilities.Results;
-using Entity.Concrete;
+using Entity.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
