@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Aspects.Log;
 using Core.Entity.Concrete;
 using Core.Helpers;
 using Entity.Domain;
@@ -13,9 +14,11 @@ namespace TodoAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
-        public UserController(IUserService userService)
+        private readonly ILog<UserController> logger;
+        public UserController(IUserService userService, ILog<UserController> logger)
         {
             this.userService = userService;
+            this.logger = logger;
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -38,7 +41,7 @@ namespace TodoAPI.Controllers
         public async Task<IActionResult> Authenticate(AuthenticateRequest request)
         {
             var result = await userService.Authenticate(request);
-            
+            logger.Info("Authenticate");
             return Ok(result);
         }
 
@@ -57,6 +60,8 @@ namespace TodoAPI.Controllers
 
             if (!result.Success)
                 return NotFound();
+
+            logger.Info($"Add {user.Email}");
             return Ok(result);
         }
 
